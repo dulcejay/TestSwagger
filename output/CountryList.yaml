@@ -1,0 +1,77 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple API"
+  version: "1.0.0"
+  title: "Country List API"
+  contact:
+    email: "you@your-company.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/VirtusaAIG/CountryList/1.0.0"
+tags:
+- name: "admins"
+  description: "Secured Admin-only calls"
+- name: "developers"
+  description: "Operations available to regular developers"
+schemes:
+- "https"
+- "http"
+paths:
+  /countries:
+    get:
+      tags:
+      - "developers"
+      summary: "searches inventory"
+      description: "By passing in the appropriate options, you can search for\navailable\
+        \ inventory in the system\n"
+      operationId: "searchInventory"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "CONTEXT_ID"
+        in: "query"
+        description: "pass an optional search string for looking up inventory"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/InventoryItem"
+        400:
+          description: "bad input parameter"
+definitions:
+  InventoryItem:
+    type: "object"
+    required:
+    - "CountryCode"
+    - "CountryFlag"
+    - "CountryID"
+    - "CountryName"
+    - "pxObjClass"
+    - "pySelected"
+    properties:
+      CountryCode:
+        type: "string"
+      CountryFlag:
+        type: "string"
+      CountryID:
+        type: "string"
+      CountryName:
+        type: "string"
+      pxObjClass:
+        type: "string"
+      pySelected:
+        type: "string"
+    example:
+      CountryID: "CountryID"
+      pxObjClass: "pxObjClass"
+      CountryFlag: "CountryFlag"
+      CountryName: "CountryName"
+      CountryCode: "CountryCode"
+      pySelected: "pySelected"
